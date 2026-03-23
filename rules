@@ -1,0 +1,191 @@
+<group name="soc_portfolio,custom_rules,">
+
+  <rule id="100201" level="10">
+    <if_sid>31101,31103,31104,31108</if_sid>
+    <regex ignorecase="yes">union.*select</regex>
+    <description>--[SQLi]-- UNION SELECT Attack</description>
+    <group>web,attack,sqli,</group>
+  </rule>
+
+  <rule id="100202" level="10">
+    <if_sid>31101,31103,31104,31108</if_sid>
+    <regex ignorecase="yes">%27.*or.*=</regex>
+    <description>--[SQLi]-- Boolean OR Injection URL-encoded</description>
+    <group>web,attack,sqli,</group>
+  </rule>
+
+  <rule id="100203" level="10">
+    <if_sid>31101,31103,31104,31108</if_sid>
+    <regex ignorecase="yes">%27.*and.*=</regex>
+    <description>--[SQLi]-- Boolean AND Injection URL-encoded</description>
+    <group>web,attack,sqli,</group>
+  </rule>
+
+  <rule id="100204" level="10">
+    <if_sid>31101,31103,31104,31108</if_sid>
+    <match>' or </match>
+    <description>--[SQLi]-- Boolean OR Injection plain quote</description>
+    <group>web,attack,sqli,</group>
+  </rule>
+
+  <rule id="100205" level="10">
+    <if_sid>31101,31103,31104,31108</if_sid>
+    <match>' and </match>
+    <description>--[SQLi]-- Boolean AND Injection plain quote</description>
+    <group>web,attack,sqli,</group>
+  </rule>
+
+  <rule id="100206" level="10">
+    <if_sid>31101,31103,31104,31108</if_sid>
+    <regex ignorecase="yes">select\s+.*\s+from</regex>
+    <description>--[SQLi]-- SELECT FROM Statement in Request</description>
+    <group>web,attack,sqli,</group>
+  </rule>
+
+  <rule id="100207" level="10">
+    <if_sid>31101,31103,31104,31108</if_sid>
+    <regex ignorecase="yes">drop\s+table</regex>
+    <description>--[SQLi]-- DROP TABLE Statement</description>
+    <group>web,attack,sqli,</group>
+  </rule>
+
+  <rule id="100208" level="10">
+    <if_sid>31101,31103,31104,31108</if_sid>
+    <regex ignorecase="yes">insert\s+into</regex>
+    <description>--[SQLi]-- INSERT INTO Statement</description>
+    <group>web,attack,sqli,</group>
+  </rule>
+
+  <rule id="100209" level="10">
+    <if_sid>31101,31103,31104,31108</if_sid>
+    <regex ignorecase="yes">sleep\s*\(</regex>
+    <description>--[SQLi]-- Time-based Blind SQLi SLEEP()</description>
+    <group>web,attack,sqli,</group>
+  </rule>
+
+
+  <rule id="100210" level="9">
+    <if_sid>31101,31103,31104,31108</if_sid>
+    <match>&lt;script</match>
+    <description>--[XSS]-- Script Tag Raw</description>
+    <group>web,attack,xss,</group>
+  </rule>
+
+  <rule id="100211" level="9">
+    <if_sid>31101,31103,31104,31108</if_sid>
+    <regex ignorecase="yes">%3Cscript</regex>
+    <description>--[XSS]-- Script Tag URL-encoded</description>
+    <group>web,attack,xss,</group>
+  </rule>
+
+  <rule id="100212" level="9">
+    <if_sid>31101,31103,31104,31108</if_sid>
+    <regex ignorecase="yes">javascript\s*:</regex>
+    <description>--[XSS]-- JavaScript Protocol Handler</description>
+    <group>web,attack,xss,</group>
+  </rule>
+
+  <rule id="100213" level="9">
+    <if_sid>31101,31103,31104,31108</if_sid>
+    <regex ignorecase="yes">onerror\s*=</regex>
+    <description>--[XSS]-- onerror Event Handler Injection</description>
+    <group>web,attack,xss,</group>
+  </rule>
+
+  <rule id="100214" level="9">
+    <if_sid>31101,31103,31104,31108</if_sid>
+    <regex ignorecase="yes">onload\s*=</regex>
+    <description>--[XSS]-- onload Event Handler Injection</description>
+    <group>web,attack,xss,</group>
+  </rule>
+
+  <rule id="100217" level="9">
+    <if_sid>31101,31103,31104,31108</if_sid>
+    <regex ignorecase="yes">%3Csvg</regex>
+    <description>--[XSS]-- SVG Tag URL-encoded Injection</description>
+    <group>web,attack,xss,</group>
+  </rule>
+
+
+  <rule id="100220" level="10">
+    <if_sid>31101,31103,31104,31108</if_sid>
+    <match>../../</match>
+    <description>--[LFI]-- Directory Traversal 2 levels</description>
+    <group>web,attack,lfi,</group>
+  </rule>
+
+  <rule id="100221" level="10">
+    <if_sid>31101,31103,31104,31108</if_sid>
+    <regex ignorecase="yes">%2e%2e%2f</regex>
+    <description>--[LFI]-- Directory Traversal URL-encoded</description>
+    <group>web,attack,lfi,</group>
+  </rule>
+
+  <rule id="100224" level="10">
+    <if_sid>31101,31103,31104,31108</if_sid>
+    <regex ignorecase="yes">%2fetc%2fpasswd</regex>
+    <description>--[LFI]-- /etc/passwd URL-encoded Access</description>
+    <group>web,attack,lfi,</group>
+  </rule>
+
+  <rule id="100225" level="12">
+    <if_sid>31101,31103,31104,31108</if_sid>
+    <match>etc/shadow</match>
+    <description>--[LFI]-- /etc/shadow Access Attempt</description>
+    <group>web,attack,lfi,</group>
+  </rule>
+
+
+  <rule id="100240" level="7">
+    <if_sid>31101,31103,31104,31108</if_sid>
+    <match ignorecase="yes">sqlmap</match>
+    <description>--[RECON]-- SQLMap Scanner Detected</description>
+    <group>web,recon,scanner,</group>
+  </rule>
+
+  <rule id="100241" level="7">
+    <if_sid>31101,31103,31104,31108</if_sid>
+    <match ignorecase="yes">nikto</match>
+    <description>--[RECON]-- Nikto Scanner Detected</description>
+    <group>web,recon,scanner,</group>
+  </rule>
+
+  <rule id="100248" level="10">
+    <if_sid>31101,31103,31104,31108</if_sid>
+    <match ignorecase="yes">nmap</match>
+    <description>--[RECON]-- Nmap Scan Detected via Web User-Agent</description>
+    <group>web,recon,scanner,nmap,</group>
+  </rule>
+
+  <rule id="100600" level="10">
+    <if_sid>86601</if_sid>
+    <match ignorecase="yes">nmap</match>
+    <description>--[RECON]-- Network Port Scan Detected by Suricata (Nmap)</description>
+    <group>network,recon,suricata,</group>
+  </rule>
+
+
+  <rule id="100400" level="10" frequency="5" timeframe="60">
+    <if_matched_sid>11401</if_matched_sid>
+    <same_source_ip/>
+    <description>--[BRUTEFORCE]-- FTP Brute Force (5 attempts/60s)</description>
+    <group>authentication_failed,bruteforce,ftp,</group>
+  </rule>
+
+  <rule id="100401" level="12">
+    <if_sid>11402</if_sid>
+    <if_matched_sid>100400</if_matched_sid>
+    <same_source_ip/>
+    <description>--[COMPROMISE]-- FTP Account Breached After Brute Force</description>
+    <group>authentication_success,bruteforce,ftp,</group>
+  </rule>
+
+  <rule id="100500" level="11">
+    <if_sid>550,554</if_sid>
+    <field name="file">/var/www</field>
+    <regex>\.php$</regex>
+    <description>--[WEBSHELL]-- New/Modified PHP File in Webroot</description>
+    <group>web,attack,webshell,</group>
+  </rule>
+
+</group>
